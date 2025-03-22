@@ -2,14 +2,16 @@ package com.devsipriano.dscommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@Entity
-@Table(name = "tb_user")
+@Entity //Diz para jpa que essa classe é uma entidade
+@Table(name = "tb_user") //Nomeia no manco de dados a tabela como tb_user
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id //Gera esse campo como Id no banco
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera um Id automaticamente quando iserido um usuário
     private Long id;
     private String name;
     @Column(unique = true)
@@ -17,6 +19,9 @@ public class User {
     private String phone;
     private Date birthDate;
     private String password;
+
+    @OneToMany(mappedBy = "client") //no lado do muitos, nossa classe ta mapeada como client
+    private List<Order> orders = new ArrayList<>(); //Um para muitos cria uma lista
 
     public User() {
     }
@@ -76,5 +81,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }

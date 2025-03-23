@@ -3,6 +3,9 @@ package com.devsipriano.dscommerce.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -21,6 +24,9 @@ public class Order {
     @ManyToOne //Muitos para um
     @JoinColumn(name = "client_id") //Cria uma coluna foreign key na tabela tb_order com nome de client_id
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }
@@ -63,4 +69,13 @@ public class Order {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public List<Product> getProducts() {
+        return items.stream().map(OrderItem::getProduct).toList();//pega cada product dentro de OrderItems e coloca em uma List
+    }
+
 }

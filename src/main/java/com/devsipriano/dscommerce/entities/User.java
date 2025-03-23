@@ -14,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera um Id automaticamente quando iserido um usuário
     private Long id;
     private String name;
-    @Column(unique = true)
+    @Column(unique = true) //No banco não havera repetição
     private String email;
     private String phone;
     private Date birthDate;

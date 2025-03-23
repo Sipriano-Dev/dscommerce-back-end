@@ -2,10 +2,7 @@ package com.devsipriano.dscommerce.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_order")
@@ -78,4 +75,16 @@ public class Order {
         return items.stream().map(OrderItem::getProduct).toList();//pega cada product dentro de OrderItems e coloca em uma List
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order order)) return false;
+
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

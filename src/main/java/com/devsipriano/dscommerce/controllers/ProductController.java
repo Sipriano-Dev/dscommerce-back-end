@@ -24,4 +24,9 @@ public class ProductController {
         return service.findById(id);
     }
 
+    @PostMapping() //Mapeia para inserir
+    public ProductDTO insert(@RequestBody ProductDTO dto) {//Faz a ligação do corpo que chega com esse dto atraves da anotação
+        return service.insert(dto);
+    }
+
 }

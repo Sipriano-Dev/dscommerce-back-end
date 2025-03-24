@@ -28,4 +28,12 @@ public class ProductService {
         return new ProductDTO(product); //Construtor criado no dto pra ceceber uma entidade e passar os dados
     }
 
+
+    public ProductDTO insert(ProductDTO dto) {
+        Product entity = new Product(dto);
+        //return new ProductDTO(repository.save(entity));//Retorna o produto dto, usando a entidade retornada pelo repository ao salvar
+        entity = repository.save(entity); //Retorna uma nova referencia atualizada
+        return new ProductDTO(entity);
+    }
+
 }

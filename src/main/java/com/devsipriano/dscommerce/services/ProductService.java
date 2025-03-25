@@ -3,6 +3,7 @@ package com.devsipriano.dscommerce.services;
 import com.devsipriano.dscommerce.dto.ProductDTO;
 import com.devsipriano.dscommerce.entities.Product;
 import com.devsipriano.dscommerce.repositories.ProductRepository;
+import com.devsipriano.dscommerce.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,8 @@ public class ProductService {
 
     @Transactional(readOnly = true)//Da um lock para somente leitura
     public ProductDTO findById(Long id) {
-        Product product = repository.findById(id).get(); //Optional inline, busca e já pega o obj dentro
+        //Optional inline, busca e já pega o obj dentro, Lança no console a exception personaliza que criei
+        Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         return new ProductDTO(product); //Construtor criado no dto pra ceceber uma entidade e passar os dados
     }
 

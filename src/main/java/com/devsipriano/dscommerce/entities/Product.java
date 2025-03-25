@@ -1,6 +1,5 @@
 package com.devsipriano.dscommerce.entities;
 
-import com.devsipriano.dscommerce.dto.ProductDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -18,8 +17,9 @@ public class Product {
     private String name;
     @Column(columnDefinition = "TEXT") //Ao mapear para o relacional, essa coluna será do tipo TEXT
     private String description;
-    private Double price;
     private String imgUrl;
+    private Double price;
+
 
     //Como é muitos para muitos, é criado uma tabela intermediaria no relacional, usa-se o Set pra não repetir o id
     // Como está em product, @JoinColumn product_id é primeiro
@@ -36,20 +36,15 @@ public class Product {
 
     }
 
-    public Product(Long id, String name, String description, Double price, String imgUrl) {
+    public Product(Long id, String name, String description, String imgUrl, Double price) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
         this.imgUrl = imgUrl;
+        this.price = price;
+
     }
 
-    public Product(ProductDTO dto) {
-        name = dto.getName();
-        description = dto.getDescription();
-        price = dto.getPrice();
-        imgUrl = dto.getImgUrl();
-    }
 
     public Long getId() {
         return id;
@@ -75,20 +70,20 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public String getImgUrl() {
         return imgUrl;
     }
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Set<Category> getCategories() {

@@ -21,7 +21,7 @@ public class ProductController {
     @GetMapping //Mapeia para o GET, trazendo tudo
     public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) { //Não precisa de anotation como @RequestParam
         Page<ProductDTO> result = service.findAll(pageable);
-        return ResponseEntity.ok(result); //Retorna um ResponseEntity é uma boa pratica pra mostr o código correspondente
+        return ResponseEntity.ok(result); //Retorna um ResponseEntity é uma boa pratica pra mostrar o código correspondente
     }
 
     @GetMapping(value = "/{id}") //Mapeia para o GET por id
@@ -38,6 +38,12 @@ public class ProductController {
                 .path("/{id}").buildAndExpand(dto.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    @PutMapping(value = "/{id}") //Mapeia para atualizar
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        dto = service.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 
 }

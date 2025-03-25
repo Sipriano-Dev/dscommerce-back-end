@@ -29,11 +29,28 @@ public class ProductService {
     }
 
 
+    @Transactional
     public ProductDTO insert(ProductDTO dto) {
-        Product entity = new Product(dto);
+        Product entity = new Product();
+        copyDtoToEntity(dto, entity);
         //return new ProductDTO(repository.save(entity));//Retorna o produto dto, usando a entidade retornada pelo repository ao salvar
         entity = repository.save(entity); //Retorna uma nova referencia atualizada
         return new ProductDTO(entity);
+    }
+
+    @Transactional
+    public ProductDTO update(Long id, ProductDTO dto) {
+        Product entity = repository.getReferenceById(id); //Não vai no banco de dados, mas instancia com id e fica monitorado pela JPA, diferente do new
+        copyDtoToEntity(dto, entity);
+        entity = repository.save(entity);
+        return new ProductDTO(entity);
+    }
+
+    private void copyDtoToEntity(ProductDTO dto, Product entity) {
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setImgUrl(dto.getImgUrl());
+        entity.setPrice(dto.getPrice());
     }
 
 }

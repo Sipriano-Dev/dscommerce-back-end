@@ -7,26 +7,28 @@ public class ProductDTO {
     private Long id;
     private String name;
     private String description;
-    private Double price;
     private String imgUrl;
+    private Double price;
+
 
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
+    public ProductDTO(Long id, String name, String description, String imgUrl, Double price) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
         this.imgUrl = imgUrl;
+        this.price = price;
+
     }
 
     public ProductDTO(Product entity) {
         id = entity.getId();
         name = entity.getName();
         description = entity.getDescription();
-        price = entity.getPrice();
         imgUrl = entity.getImgUrl();
+        price = entity.getPrice();
     }
 
     public Long getId() {
@@ -41,12 +43,14 @@ public class ProductDTO {
         return description;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
     public Double getPrice() {
         return price;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
+
 
 }

@@ -10,7 +10,9 @@ public class ProductDTO {
     private String imgUrl;
     private Double price;
 
-    //Não faz sentido ter construtor vazio se não tem set, como inserir os dados depois?
+    public ProductDTO() {
+
+    }
 
     public ProductDTO(Long id, String name, String description, String imgUrl, Double price) {
         this.id = id;

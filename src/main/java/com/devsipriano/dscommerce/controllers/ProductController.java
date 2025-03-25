@@ -4,6 +4,7 @@ import com.devsipriano.dscommerce.dto.CustomError;
 import com.devsipriano.dscommerce.dto.ProductDTO;
 import com.devsipriano.dscommerce.services.ProductService;
 import com.devsipriano.dscommerce.services.exceptions.ResourceNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping() //Mapeia para inserir
-    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {//Faz a ligação do corpo que chega com esse dto atraves da anotação
+    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {//Faz a ligação do corpo que chega com esse dto atraves da anotação
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder //Código pra pega a URI
                 .fromCurrentRequest()
@@ -44,7 +45,8 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}") //Mapeia para atualizar
-    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+    //@Valid ativa para que seja validado as condiçoes que chegam nos dtos
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id,@Valid @RequestBody ProductDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }

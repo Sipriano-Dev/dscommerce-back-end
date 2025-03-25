@@ -16,7 +16,7 @@ public class Payment {
     private Instant moment;
 
     @OneToOne
-    @MapsId //coloca a chave primaria como order_id como id dessa tabela, os dois tem o mesmo id
+    @MapsId
     private Order order;
 
     public Payment(Long id, Instant moment, Order order) {

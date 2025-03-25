@@ -7,12 +7,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@Entity //Diz para jpa que essa classe é uma entidade
-@Table(name = "tb_user") //Nomeia no manco de dados a tabela como tb_user
+@Entity
+@Table(name = "tb_user")
 public class User {
 
-    @Id //Gera esse campo como Id no banco
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera um Id automaticamente quando iserido um usuário
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @Column(unique = true) //No banco não havera repetição
@@ -21,8 +21,8 @@ public class User {
     private Date birthDate;
     private String password;
 
-    @OneToMany(mappedBy = "client") //no lado do muitos, nossa classe ta mapeada como client
-    private List<Order> orders = new ArrayList<>(); //Um para muitos cria uma lista
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }

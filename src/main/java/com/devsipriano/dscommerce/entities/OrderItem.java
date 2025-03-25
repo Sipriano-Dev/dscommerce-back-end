@@ -10,15 +10,14 @@ import java.util.Objects;
 @Table(name = "tb_order_item")
 public class OrderItem {
 
-    @EmbeddedId //Usa a classe que estava marcada
-    private OrderItemPK id = new OrderItemPK(); //Chave composta tem que instanciar
+    @EmbeddedId
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
     public OrderItem() {
     }
 
-    // Ao invés de usar o Id, usa os atributos dentro dele (order e product), para não revelar o artificio usado
     public OrderItem(Order order, Product product, Double price, Integer quantity) {
         id.setOrder(order);
         id.setProduct(product);
@@ -42,7 +41,6 @@ public class OrderItem {
         this.price = price;
     }
 
-    //Cria gets e sets para o order e product e não para o id, mesmo motivo do construtor, não expor
     public Order getOrder() {
         return id.getOrder();
     }

@@ -15,14 +15,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(columnDefinition = "TEXT") //Ao mapear para o relacional, essa coluna será do tipo TEXT
+    @Column(columnDefinition = "TEXT")
     private String description;
     private String imgUrl;
     private Double price;
 
-
-    //Como é muitos para muitos, é criado uma tabela intermediaria no relacional, usa-se o Set pra não repetir o id
-    // Como está em product, @JoinColumn product_id é primeiro
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -95,7 +92,7 @@ public class Product {
     }
 
     public List<Order> getOrders() {
-        return items.stream().map(OrderItem::getOrder).toList();//Pega cada Order dentro de OrderItem e cria uma lista com eles
+        return items.stream().map(OrderItem::getOrder).toList();
     }
 
     @Override

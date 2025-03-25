@@ -1,9 +1,8 @@
 package com.devsipriano.dscommerce.services.exceptions;
 
-public class ResourceNotFoundException extends RuntimeException{//Runtime não exige o try catch, Exception exige
+public class ResourceNotFoundException extends RuntimeException{
 
-    //Vai intercepta a excetpion e lança sua propria
-    public ResourceNotFoundException(String msg) {//Recebe e passa a msg para runtimeException
+    public ResourceNotFoundException(String msg) {
         super(msg);
     }
 

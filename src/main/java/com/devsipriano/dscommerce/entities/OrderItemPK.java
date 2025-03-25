@@ -6,11 +6,9 @@ import jakarta.persistence.ManyToOne;
 
 import java.util.Objects;
 
-// É um chave composta, de uma tabela que relaciona outras duas, usandos os dois ids
 @Embeddable //Marca para ser usado no Id do OrderItem
 public class OrderItemPK {
 
-    // A tabela do meio usara dois muitos pra um, fazendo assim um muitos pra muitos nas tabelas das pontas
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;

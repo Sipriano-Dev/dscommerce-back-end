@@ -11,7 +11,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") //Salva sem time zone, utc horario de greenwhich
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Date moment;
     private OrderStatus status;
 
@@ -19,7 +19,7 @@ public class Order {
     private Payment payment;
 
     @ManyToOne //Muitos para um
-    @JoinColumn(name = "client_id") //Cria uma coluna foreign key na tabela tb_order com nome de client_id
+    @JoinColumn(name = "client_id")
     private User client;
 
     @OneToMany(mappedBy = "id.order")
@@ -72,7 +72,7 @@ public class Order {
     }
 
     public List<Product> getProducts() {
-        return items.stream().map(OrderItem::getProduct).toList();//pega cada product dentro de OrderItems e coloca em uma List
+        return items.stream().map(OrderItem::getProduct).toList();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.devsipriano.dscommerce.controllers;
 
+import com.devsipriano.dscommerce.dto.CustomError;
 import com.devsipriano.dscommerce.dto.ProductDTO;
 import com.devsipriano.dscommerce.services.ProductService;
+import com.devsipriano.dscommerce.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.Instant;
 
 @RestController
 @RequestMapping(value = "/products") //Mapeia como o caminha de requisições

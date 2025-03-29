@@ -2,10 +2,7 @@ package com.devsipriano.dscommerce.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -23,6 +20,12 @@ public class User {
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "tb_user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
     }

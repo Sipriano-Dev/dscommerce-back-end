@@ -14,7 +14,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(unique = true) //No banco não havera repetição
+    @Column(unique = true)
     private String email;
     private String phone;
     private Date birthDate;
@@ -79,6 +79,10 @@ public class User implements UserDetails {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
     @Override

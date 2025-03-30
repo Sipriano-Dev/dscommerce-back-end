@@ -1,7 +1,9 @@
 package com.devsipriano.dscommerce.services;
 
+import com.devsipriano.dscommerce.dto.CategoryDTO;
 import com.devsipriano.dscommerce.dto.ProductDTO;
 import com.devsipriano.dscommerce.dto.ProductMinDTO;
+import com.devsipriano.dscommerce.entities.Category;
 import com.devsipriano.dscommerce.entities.Product;
 import com.devsipriano.dscommerce.repositories.ProductRepository;
 import com.devsipriano.dscommerce.services.exceptions.DatabaseException;
@@ -38,6 +40,7 @@ public class ProductService {
     public ProductDTO insert(ProductDTO dto) {
         Product entity = new Product();
         copyDtoToEntity(dto, entity);
+
         entity = repository.save(entity);
         return new ProductDTO(entity);
     }
@@ -72,6 +75,11 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setImgUrl(dto.getImgUrl());
         entity.setPrice(dto.getPrice());
+
+        entity.getCategories().clear();
+        for (CategoryDTO catDto : dto.getCategories()) {
+            entity.getCategories().add(new Category(catDto.getId(), catDto.getName()));
+        }
     }
 
 
